@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Post</title>
+</head>
+<body>
+
+    <h1 id="postHeader">QnA 게시판</h1>
+
+    <form action="http://localhost:8080/" method="post">
+    <table id="postTable">
+        <tr style="height:10%">
+            <th>제목</th>
+            <td><input style="height:100%; width:100%" type="text" name="title" id = "title" required></td>
+        </tr>
+        <tr style="height:10%">
+            <th>작성자 공개 여부</th>
+            <td ><input type="checkbox" name="writer" id = "writer"></td>
+        </tr>
+
+        <tr style="height:10%">
+            <th>태그</th>
+            <td><input style="height:100%; width:100%" type="text" name="tag" id = "tag" required></td>
+        </tr>
+
+        <tr style="height:80%">
+            <th>내용</th>
+            <td><textarea 
+                style="height:100%; width:100%"
+                name="content" id = "content" cols = "90" required></textarea></td>
+        </tr>
+        <tr style="height:10%">
+                <th>첨부파일</th>
+                <td><input type="file" name ="profile"></td>
+        </tr>       
+    </table>             
+    <input type="submit" value="등록하기" id = "register" onclick="dialog()"> 
+    </form>
+</body>
+<script>
+    function dialog(){
+        var r = confirm("글을 등록하시겠습니까?");
+        if(r==true)
+        {
+            window.location.replace("http://localhost:8080/");
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>board</title>
+</head>
+<body>
+    <h1 id="title">QnA</h1>
+
+    <table id = "table">
+
+    <thead>
+        <tr>
+            <th>no</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach(function(item, index){ %>
+            <tr>
+                <td style="text-align : center;"><%= item.post_id %></td>
+                <td><a href= "/page/<%=item.post_id%>"><%= item.title %></a></td>
+                <td style="text-align : center;"><% if(item.writer == "on") {%>
+                    <%= "익명"%>
+                    <% }%>
+                </td>
+                <td style="text-align : center;" >
+                    <%= item.datetime %>
+                </td>
+                <td style="text-align : center;"><%= item.views %></td>
+            </tr> 
+        <% }); %>
+    </tbody>
+ 
+    </table>
+    <button id ="write" onclick="window.location.href='http://localhost:8080/post'">글쓰기</button>
+    
+    <div id="search">
+        <input  type="text" name="search" id="search"/>
+        <input type="submit" name="submit" value="찾기"/>
+    </div>
+    
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>update</title>
+</head>
+<body>
+    
+    <h1 id="postHeader">QnA 게시판</h1>
+
+    <form method="post">
+    <table id="postTable">
+        <% data.forEach(function(item, index){ %>
+            <% if(index == 0) { %>
+            <tr style="height:10%">
+            <th style="width: 20%">제목</th>
+            <td>
+                <input style="height:100%; width:100%" type="text" name="update_title" id="update_title" value = <%= item.title %>>
+            </td>
+        </tr>
+        <tr style="height:10%">
+            <th style="width: 20%">작성자</th>
+            <td >
+                <% if(item.write == "on") %>
+                <%= "익명"  %>
+            </td>
+        </tr>
+
+        <tr style="height:10%">
+            <th style="width: 20%">분류</th>
+            <td>
+                <input style="height:100%; width:100%" type="text" name="update_tag" id="update_tag" value = <%= item.tag %>>       
+            </td>
+        </tr>
+
+        <tr style="height:80%">
+            <th style="width: 20%">내용</th>
+            <td>
+                <input style="height:100%; width:100%" type="text" name="update_content" id="update_content" value = <%= item.content %>>
+            </td>
+        </tr>
+        <% } %>
+        <% }); %>
+    </table>
+    <input style ="float:right" type="submit" id = "update" value="등록하기">    
+    </form>
+    
+    <button style="margin-top : 20px" id = "list" onclick="window.location.href='http://localhost:8080'">목록</button> 
+</body>
+</html>
+</body>
+</html>

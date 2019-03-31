@@ -1,0 +1,76 @@
+#title{
+  text-align : center;
+  position: static;
+}
+#table {
+  width: 80%;
+  border-top : 1px solid #444444;
+  border-collapse: collapse;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+#postTable{
+  width: 80%;
+  height: 500px;
+  border-top : 1px solid #444444;
+  border-collapse: collapse;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#commentTable{
+  width: 80%;
+  height: 50px;
+  border-top : 1px solid #444444;
+  border-collapse: collapse;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+#registerComment{
+  width: 80%;
+  height: 50px;
+  border-top : 1px solid #444444;
+  border-collapse: collapse;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+
+td, th{
+  border: 1px solid #bcbcbc;
+}
+
+#commentPost{
+  clear: both;
+  text-align: right
+}
+
+#write{
+  margin-right: 100px;
+  margin-top: 100px;
+  float: right;
+}
+
+#search{
+  clear: both;
+  text-align: center;
+  margin: auto;
+}
+
+#register{
+  margin-right: 100px;
+  margin-top: 100px;
+  float: right;
+}
+
+#postHeader{
+  text-align: center;
+}

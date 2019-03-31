@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Post</title>
+</head>
+<body>
+
+    <h1 id="postHeader">QnA 게시판</h1>
+
+    <table id="postTable">
+        <% data.forEach(function(item, index){ %>
+            <% if(index == 0) { %>
+            <tr style="height:10%">
+            <th style="width: 20%">제목</th>
+            <td>
+                <%= item.title %>
+            </td>
+        </tr>
+        <tr style="height:10%">
+            <th style="width: 20%">작성자</th>
+            <td >
+                <% if(item.write == "on") %>
+                <%= "익명"  %>
+            </td>
+        </tr>
+
+        <tr style="height:10%">
+            <th style="width: 20%">태그</th>
+            <td>
+                <%= item.tag %>                
+            </td>
+        </tr>
+
+        <tr style="height:80%">
+            <th style="width: 20%">내용</th>
+            <td>
+                <%= item.content %>
+            </td>
+        </tr>
+        <% } %>
+        <% }); %>
+    </table>
+
+    
+    <% data.forEach(function(item, index){ %>
+     <p> <%=item.comment_content %></p> 
+    <% }); %>
+     
+
+    <form method="post">
+    <table id = "commentTable">
+            <tr style="height:5%">
+                    <th>작성자 공개 여부</th>
+                    <td ><input type="checkbox" name="comment_writer" id = "comment_writer"></td>         
+            </tr> 
+            <tr style="height:10%">
+                <th>댓글쓰기</th>
+                <td><textarea style="height:100% ; width: 100%" name="comment_content" id="comment_content" cols="30" rows="10"></textarea></td>
+            </tr> 
+        </table>
+    <input style="float: right ; margin-top : 20px; margin-right: 100px" type = "submit" id = "commentPost">
+    </form>
+
+    <button style="margin-top : 20px" id = "list" onclick="window.location.href='http://localhost:8080'">목록</button> 
+    <button style="margin-top : 20px" id = "list" onclick="window.location.href='http://localhost:8080/update/<%=data[0].post_id %>'">수정하기</button> 
+</body>
+</html>
