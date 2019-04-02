@@ -47,7 +47,14 @@
 
     
     <% data.forEach(function(item, index){ %>
-     <p> <%=item.comment_content %></p> 
+     <p> <%=item.comment_content %>
+     <% if(item.comment > 0) { %>
+        <p style = "clear : both; margin-right: 100px">
+            <a  href="/comment/update/<%= item.comment_id%>"><%= "수정"%></a> 
+            <a href="/comment/delete/<%= item.comment_id%>"><%= "/삭제" %></a> 
+        </p>
+     <% } %>
+    </p>
     <% }); %>
      
 
@@ -62,10 +69,12 @@
                 <td><textarea style="height:100% ; width: 100%" name="comment_content" id="comment_content" cols="30" rows="10"></textarea></td>
             </tr> 
         </table>
-    <input style="float: right ; margin-top : 20px; margin-right: 100px" type = "submit" id = "commentPost">
+    <input style="float: right ; margin-top : 20px; margin-right: 100px" type = "submit" id = "commentPost" value = '댓글올리기'>
     </form>
 
-    <button style="margin-top : 20px" id = "list" onclick="window.location.href='http://localhost:8080'">목록</button> 
-    <button style="margin-top : 20px" id = "list" onclick="window.location.href='http://localhost:8080/update/<%=data[0].post_id %>'">수정하기</button> 
+    <button style="margin-top : 20px" id = "list" onclick="window.location.href='http://localhost:8080'">목록</button>
+    <button style="margin-top : 20px" id = "update" onclick="window.location.href='http://localhost:8080/update/<%=data2 %>'">수정하기</button>  
+    <button style="margin-top : 20px" id = "delete" onclick="window.location.href='http://localhost:8080/delete/<%=data2 %>'">삭제하기</button> 
+
 </body>
 </html>

@@ -43,7 +43,6 @@ app.post('/',function(req,res){
     var body = req.body;
     var currentDate = new Date(); //use your date here
     let datetime = currentDate.toISOString().substr( 0, 10 );
-    console.log(body);
     connection.query('INSERT INTO post (title,writer,content,comment,tag,views,datetime) VALUES (?,?,?,?,?,?,?)'
     ,[body.title,body.writer,body.content,0,body.tag,0,datetime],function(err,result){
         if(err) throw err;
@@ -56,11 +55,11 @@ app.get('/page/:pageId',function(req,res){
     var filteredId = path.parse(req.params.pageId).base;
     connection.query('SELECT * from post left outer join comment on post.post_id = comment.post_id where post.post_id = ?',[filteredId],function(err,result)
     {
-        console.log(result);
         connection.query('UPDATE post set views=views+1 where post_id =?',[filteredId],function(err,result2){
         if(err){throw err}
         res.render('view',{
-            data : result
+            data : result,  
+            data2 : filteredId
         });
     })
     })
@@ -71,10 +70,11 @@ app.post('/page/:pageId',function(req,res)
 {
     var filteredId = path.parse(req.params.pageId).base;
     var body = req.body;
-    console.log(body);
     connection.query('INSERT INTO comment (comment_content,post_id,comment_writer,comment_dateday) VALUES (?,?,?,now())',[body.comment_content,filteredId,body.comment_writer],function(err,result){
+        connection.query('UPDATE post set comment = comment + 1 where post_id = ?',[filteredId],function(err,result2){
         if(err) throw err;
         res.redirect('/page/'+filteredId);
+        })
     })
 })
 
@@ -101,7 +101,30 @@ app.post('/update/:pageId',function(req,res){
     })
 })
 
-//삭제하기
+//질문 삭제하기
+app.get('/delete/:pageId',function(req,res){
+    
+    connection.query('DELETE FROM post Where post_id = ?',[req.params.pageId],function(err,result){
+        if(err){throw err};
+        res.redirect('/');
+    })
+
+})
+
+//댓글삭제
+app.get('/comment/delete/:commentId',function(req,res){
+
+    connection.query('SELECT post_id from comment where comment_id = ?',[req.params.commentId],function(err,result){
+        var data = result;
+        connection.query('DELETE FROM comment Where comment_id = ?',[req.params.commentId],function(err,result2){
+           connection.query('UPDATE post set comment = comment-1 where post_id = ?',[data[0].post_id],function(err,result3){
+                if(err){throw err};
+                res.redirect('/page/'+result[0].post_id);
+            })
+        })
+    })
+})
+//댓글 수정
 
 var server = app.listen(8080, function(){
     console.log("hi");
